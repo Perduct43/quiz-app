@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ APP 4</title>
+</head>
+
+<body>
+    <h1>NUMBER QUIZ</h1>
+
+    <h2 id="prompt"></h2>
+
+    <button id="ansBtn1" onclick="pickAnswer(this)"></button>
+    <button id="ansBtn2" onclick="pickAnswer(this)"></button>
+    <button id="ansBtn3" onclick="pickAnswer(this)"></button>
+
+    <p>Feedback: <span id="feedback"></span></p>
+    <p>Score: <span id="pointCount">0</span></p>
+</body>
+
+<script>
+    let questionBank = [
+        {
+            ask: "What is 25 + 15?",
+            o1: 30,
+            o2: 40,
+            o3: 45,
+            right: 40
+        },
+        {
+            ask: "What is 9 × 5?",
+            o1: 35,
+            o2: 40,
+            o3: 45,
+            right: 45
+        },
+        {
+            ask: "What is 90 − 28?",
+            o1: 62,
+            o2: 68,
+            o3: 72,
+            right: 62
+        }
+    ];
+
+    let step = 0;
+    let points = 0;
+
+    function renderQuestion() {
+        let item = questionBank[step];
+        document.getElementById("prompt").innerText = item.ask;
+        document.getElementById("ansBtn1").innerText = item.o1;
+        document.getElementById("ansBtn2").innerText = item.o2;
+        document.getElementById("ansBtn3").innerText = item.o3;
+        document.getElementById("feedback").innerText = "";
+    }
+
+    renderQuestion();
+
+    function pickAnswer(button) {
+        let chosenValue = Number(button.innerText);
+        let correctValue = questionBank[step].right;
+
+        if (chosenValue === correctValue) {
+            points++;
+            document.getElementById("pointCount").innerText = points;
+            document.getElementById("feedback").innerText = "Correct";
+            step++;
+
+            if (step < questionBank.length) {
+                renderQuestion();
+            } else {
+                finish();
+            }
+        } else {
+            document.getElementById("feedback").innerText = "Wrong";
+        }
+    }
+
+    function finish() {
+        document.getElementById("prompt").innerText = "Quiz Complete";
+        document.getElementById("feedback").innerText =
+            "You scored " + points + " out of " + questionBank.length;
+
+        document.getElementById("ansBtn1").style.display = "none";
+        document.getElementById("ansBtn2").style.display = "none";
+        document.getElementById("ansBtn3").style.display = "none";
+    }
+</script>
+
+</html>
