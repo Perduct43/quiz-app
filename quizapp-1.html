@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+</head>
+
+<body>
+    <h1>QUIZ APP 1</h1>
+
+    <h2 id="question1"></h2>
+
+    <button id="option1" onclick="checkanswer(this)"></button>
+    <butdadasasdasdsadsadsasdssston id="option2" onclick="checkanswer(this)"></button>
+    <button id="option3" onclick="checkanswer(this)"></button>
+
+    <p>Your answer is: <span id="res"></span></p>
+    <p>Score: <span id="score">0</span></p>
+
+</body>
+
+<script>
+    let questions = [
+        {
+            question: "What is 30 + 2?",
+            option1: 5,
+            option2: 32,
+            option3: 3,
+            answer: 32
+        },
+        {
+            question: "What is 5 x 3?",
+            option1: 15,
+            option2: 41,
+            option3: 19,
+            answer: 15
+        },
+        {
+            question: "What is 60 - 4?",
+            option1: 16,
+            option2: 56,
+            option3: 34,
+            answer: 56
+        }
+    ];
+
+    let idx = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        let q = questions[idx];
+        document.getElementById("question1").innerText = q.question;
+        document.getElementById("option1").innerText = q.option1;
+        document.getElementById("option2").innerText = q.option2;
+        document.getElementById("option3").innerText = q.option3;
+        document.getElementById("res").innerText = "";
+    }
+
+    loadQuestion();
+
+    function checkanswer(selectedbutton) {
+        let useranswer = Number(selectedbutton.innerText);
+        let correctanswer = questions[idx].answer;
+
+        if (useranswer === correctanswer) {
+            score++;
+            document.getElementById("score").innerText = score;
+            document.getElementById("res").innerText = "Correct";
+
+            idx++;
+
+            if (idx < questions.length) {
+                loadQuestion();
+            } else {
+                quizComplete();
+            }
+        } else {
+            document.getElementById("res").innerText = "Wrong";
+        }
+    }
+
+    function quizComplete() {
+        document.getElementById("question1").innerText = "Quiz Finished 🎉";
+        document.getElementById("res").innerText =
+            "Final Score: " + score + " / " + questions.length;
+
+        document.getElementById("option1").style.display = "none";
+        document.getElementById("option2").style.display = "none";
+        document.getElementById("option3").style.display = "none";
+    }
+</script>
+
+</html>
