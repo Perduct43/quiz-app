@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        quiz app 
+    </h1>
+
+    <p id="question"></p>
+
+    <button id="answer-1" onclick="answer(0)"></button>
+    <button id="answer-2" onclick="answer(1)"></button>
+    <button id="answer-3" onclick="answer(2)"></button>
+    <p>Your answer is:<span id="result"></span></p>
+</body>
+<script>
+    let question = [
+    "What is 4 + 3?",
+    "What is 11 - 4?",
+    "What is 2 x 5?"
+];
+
+let options = [
+    ["6", "7", "10"],
+    ["7", "5", "4"],
+    ["4", "10", "12"]
+];
+
+let answers = [1, 0, 1];
+let idx = 0
+
+function option() {
+    document.getElementById("question").innerText = question[idx]
+    document.getElementById("answer-1").innerText = options[idx][0]
+    document.getElementById("answer-2").innerText = options[idx][1]
+    document.getElementById("answer-3").innerText = options[idx][2]
+}
+
+function answer(num) {
+    console.log(num) 
+    if(num === answers[idx]) {
+        document.getElementById("result").innerText = "Right"
+        idx++
+        option()
+    } else {
+        document.getElementById("result").innerText = "Wrong"
+    }
+}
+
+option()
+</script>
+</html>

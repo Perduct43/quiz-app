@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Witch one is right?
+    </h1>
+
+    <p id="questions"></p>
+
+    <button id="answer-1" onclick="answer(0)"></button>
+    <button id="answer-2" onclick="answer(1)"></button>
+    <button id="answer-3" onclick="answer(2)"></button>
+    <p>Your answer is:<span id="res"></span></p>
+</body>
+<script>
+    let questions = [
+    "What is 5 + 3?",
+    "What is 10 - 4?",
+    "What is 3 x 3?"
+];
+
+let options = [
+    ["6", "8", "10"],
+    ["6", "5", "4"],
+    ["6", "9", "12"]
+];
+
+let answers = [1, 0, 1];
+let idx = 0
+
+function option() {
+    document.getElementById("questions").innerText = questions[idx]
+    document.getElementById("answer-1").innerText = options[idx][0]
+    document.getElementById("answer-2").innerText = options[idx][1]
+    document.getElementById("answer-3").innerText = options[idx][2]
+}
+
+function answer(num) {
+    console.log(num) 
+    if(num === answers[idx]) {
+        document.getElementById("res").innerText = "Right"
+        idx++
+        option()
+    } else {
+        document.getElementById("res").innerText = "Wrong"
+    }
+}
+
+option()
+</script>
+</html>

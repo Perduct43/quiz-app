@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>QUIZ APP</h1>
+    <h2 id="question1"></h2>
+    <button id="option1" onclick="checkanswer(this)"></button>
+    <button id="option2" onclick="checkanswer(this)"></button>
+    <button id="option3" onclick="checkanswer(this)"></button>
+    <p>Your answer is:<span id="res"></span></p>
+</body>
+<script>
+    let question = [{
+        question: "What is 2 + 8?",
+        option1: 5,
+        option2: 3,
+        option3: 10,
+        answer: 10
+    }, {
+        question: "What is 30 - 4?",
+        option1: 26,
+        option2: 3,
+        option3: 8,
+        answer: 26
+    }, {
+        question: "What is 7 x 3?",
+        option1: 50,
+        option2: 24,
+        option3: 21,
+        answer: 21
+    }]
+
+    let idx = 0
+
+    function option() {
+        let q = question[idx]
+        document.getElementById("question1").innerText = q.question
+        document.getElementById("option1").innerText = q.option1
+        document.getElementById("option2").innerText = q.option2
+        document.getElementById("option3").innerText = q.option3
+
+    }
+    option()
+
+
+    function checkanswer(selectedbutton) {
+        let useransnwer = Number(selectedbutton.innerText)
+        let correctanswer = question[idx].answer
+        if (useransnwer === correctanswer) {
+            idx++
+            document.getElementById("res").innerText = "YOUR ANSWER IS GOOD BOI"
+            if (idx < question.length) {
+                option()
+            } else {
+                socomplete()
+            }
+        } else {
+            document.getElementById("res").innerText = "YOUR ANSWER IS WRONG EWW"
+        }
+    }
+
+
+    function socomplete() {
+        document.getElementById("question1").innerText = "VERY VERY GOOD 1 POUND FISH"
+        document.getElementById("res").innerText = "🥸🥸"
+        document.getElementById("option1").style.display = "none"
+        document.getElementById("option2").style.display = "none"
+        document.getElementById("option3").style.display = "none"
+    }
+</script>
+
+</html>

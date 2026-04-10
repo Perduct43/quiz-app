@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ APP 3</title>
+</head>
+
+<body>
+    <h1>MATH QUIZ</h1>
+
+    <h2 id="quizQuestion"></h2>
+
+    <button id="choiceOne" onclick="checkPick(this)"></button>
+    <button id="choiceTwo" onclick="checkPick(this)"></button>
+    <button id="choiceThree" onclick="checkPick(this)"></button>
+
+    <p>Status: <span id="answerStatus"></span></p>
+    <p>Points: <span id="points">0</span></p>
+</body>
+
+<script>
+    let quizData = [
+        {
+            text: "What is 14 + 9?",
+            one: 23,
+            two: 21,
+            there: 25,
+            correctAns: 23
+        },
+        {
+            text: "What is 6 × 7?",
+            one: 40,
+            two: 42,
+            there: 36,
+            correctAns: 42
+        },
+        {
+            text: "What is 100 − 45?",
+            one: 65,
+            two: 55,
+            there: 60,
+            correctAns: 55
+        }
+    ];
+
+    let qIndex = 0;
+    let totalPoints = 0;
+
+    function showQuiz() {
+        let currentQ = quizData[qIndex];
+        document.getElementById("quizQuestion").innerText = currentQ.text;
+        document.getElementById("choiceOne").innerText = currentQ.one;
+        document.getElementById("choiceTwo").innerText = currentQ.two;
+        document.getElementById("choiceThree").innerText = currentQ.there;
+        document.getElementById("answerStatus").innerText = "";
+    }
+
+    showQuiz();
+
+    function checkPick(btn) {
+        let picked = Number(btn.innerText);
+        let correct = quizData[qIndex].correctAns;
+
+        if (picked === correct) {
+            totalPoints++;
+            document.getElementById("points").innerText = totalPoints;
+            document.getElementById("answerStatus").innerText = "Nice 👍";
+            qIndex++;
+
+            if (qIndex < quizData.length) {
+                showQuiz();
+            } else {
+                endQuiz();
+            }
+        } else {
+            document.getElementById("answerStatus").innerText = "Nope";
+        }
+    }
+
+    function endQuiz() {
+        document.getElementById("quizQuestion").innerText = "All Done";
+        document.getElementById("answerStatus").innerText =
+            "Final Points: " + totalPoints + " / " + quizData.length;
+
+        document.getElementById("choiceOne").style.display = "none";
+        document.getElementById("choiceTwo").style.display = "none";
+        document.getElementById("choiceThree").style.display = "none";
+    }
+</script>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+</head>
+
+<body>
+    <h1>QUIZ GAME 2 </h1>
+
+    <h2 id="qText"></h2>
+
+    <button id="btnA" onclick="verifyAnswer(this)"></button>
+    <button id="btnB" onclick="verifyAnswer(this)"></button>
+    <button id="btnC" onclick="verifyAnswer(this)"></button>
+
+    <p>Result: <span id="resultText"></span></p>
+    <p>Total Points: <span id="scorenumeber">0</span></p>
+</body>
+
+<script>
+    let quizList = [
+        {
+            q: "What is 12 + 6?",
+            a: 15,
+            b: 20,
+            c: 18,
+            correct: 18
+        },
+        {
+            q: "What is 8 × 4?",
+            a: 32,
+            b: 24,
+            c: 40,
+            correct: 32
+        },
+        {
+            q: "What is 50 − 9?",
+            a: 41,
+            b: 39,
+            c: 45,
+            correct: 41
+        }
+    ];
+
+    let idx = 0;
+    let points = 0;
+
+    function showQuestion() {
+        let data = quizList[idx];
+        document.getElementById("qText").innerText = data.q;
+        document.getElementById("btnA").innerText = data.a;
+        document.getElementById("btnB").innerText = data.b;
+        document.getElementById("btnC").innerText = data.c;
+        document.getElementById("resultText").innerText = "";
+    }
+
+    showQuestion();
+
+    function verifyAnswer(btn) {
+        let chosen = Number(btn.innerText);
+        let right = quizList[idx].correct;
+
+        if (chosen === right) {
+            points++;
+            document.getElementById("scorenumeber").innerText = points;
+            document.getElementById("resultText").innerText = "Correct";
+            idx++;
+
+            if (idx < quizList.length) {
+                showQuestion();
+            } else {
+                finishQuiz();
+            }
+        } else {
+            document.getElementById("resultText").innerText = "Wrong";
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById("qText").innerText = "Quiz";
+        document.getElementById("resultText").innerText =
+            "Your Score: " + points + " / " + quizList.length;
+
+        document.getElementById("btnA").style.display = "none";
+        document.getElementById("btnB").style.display = "none";
+        document.getElementById("btnC").style.display = "none";
+    }
+</script>
+
+</html>

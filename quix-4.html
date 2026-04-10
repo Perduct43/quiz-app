@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+</style>
+
+<body>
+    <h1>
+        Witch one is right?
+    </h1>
+
+    <p id="questions"></p>
+
+    <button id="answer-1" onclick="answer(0)"></button>
+    <button id="answer-2" onclick="answer(1)"></button>
+    <button id="answer-3" onclick="answer(2)"></button>
+    <p>Your answer is:<span id="res"></span></p>
+</body>
+<script>
+
+    let questions = [
+        "What is 2 + 8?",
+        "What is 30 - 4?",
+        "What is 7 x 3?"
+    ];
+
+    let options = [
+        ["6", "16", "10"],
+        ["26", "5", "4"],
+        ["6", "21", "12"]
+    ];
+
+    let answers = [2, 0, 1];
+    let idx = 0
+
+    function option() {
+        document.getElementById("questions").innerText = questions[idx]
+        document.getElementById("answer-1").innerText = options[idx][0]
+        document.getElementById("answer-2").innerText = options[idx][1]
+        document.getElementById("answer-3").innerText = options[idx][2]
+    }
+
+    function answer(num) {
+        console.log(num)
+        if (num === answers[idx]) {
+            document.getElementById("res").innerText = "Right"
+            idx++
+            if (idx < questions.length) {
+                option()
+            } else {
+                socomplete()
+            }
+        } else {
+            document.getElementById("res").innerText = "Wrong"
+        }
+    }
+
+    function socomplete() {
+        document.getElementById("questions").innerText = "CRONGATULATIONS🎇🎇🎆🎆"
+        document.getElementById("res").innerText = "you have fully completed the quiz."
+        document.getElementById("answer-1").style.display = "none"
+        document.getElementById("answer-2").style.display = "none"
+        document.getElementById("answer-3").style.display = "none"
+    }
+
+    option()
+</script>
+</html>
